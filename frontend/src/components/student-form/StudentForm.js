@@ -15,7 +15,7 @@ import {
     Typography,
 } from "@mui/material";
 import { BackendApi } from "../../client/backend-api";
-import classes from "./StudentForm.css";
+import classes from "./styles.module.css";
 import {StudentApi} from "../../client/backend-api/student";
 
 dayjs.extend(utc);

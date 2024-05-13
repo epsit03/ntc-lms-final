@@ -26,6 +26,8 @@ import { AdminDashboard} from "./adminDashboard"
 import { StudentsList } from "../students-list/students-list"
 import { WithLoginProtector } from "../access-control/login-protector"
 import { WithAdminProtector } from "../access-control/admin-protector"
+import {StudentDues} from "../dues/dues"
+import { IssueBook } from "../issue-book/issue"
 
 
 export const AppLayout = () => {
@@ -120,7 +122,7 @@ export const AppLayout = () => {
                                         <MenuItem onClick={() => navigate('/adminDash')}>
                                             <Typography textAlign="center">Dashboard</Typography>
                                         </MenuItem>
-                                        <MenuItem onClick={<Navigate to="/dues" />}>
+                                        <MenuItem onClick={<Navigate to="/pendingDues" />}>
                                             <Typography textAlign="center">Dues</Typography>
                                         </MenuItem>
                                         <MenuItem onClick={handleLogout}>
@@ -147,7 +149,9 @@ export const AppLayout = () => {
                 <Route path="/home" exact element={<LandingPage />} /> 
                 <Route path="/adminDash" exact element={<AdminDashboard />} />  
                 <Route path="/stForm" exact element={<StudentForm/>} />
-                <Route path="/stList" exact element={<StudentsList/>} />                  
+                <Route path="/stList" exact element={<StudentsList/>} />
+                <Route path="/pendingDues" exact element={<StudentDues/>} /> 
+                <Route path="/issueBook" exact element={<IssueBook />} />              
                 <Route
                     path="/books/:bookIsbn"
                     element={

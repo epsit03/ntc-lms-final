@@ -154,20 +154,20 @@ const handleLogout = () => {
                   <h3>Students List</h3> 
               </div>
 
-              <div class="nav-option option3"> 
+              <div class="nav-option option3" onClick={() => navigate('/issueBook')}> 
                   <img src= 
 "https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/5.png"
                       class="nav-img" 
-                      alt="report" /> 
-                  <h3> Report</h3> 
+                      alt="issue books" /> 
+                  <h3> Issue Books</h3> 
               </div> 
 
-              <div class="nav-option option4"> 
+              <div class="nav-option option4" onClick={() => navigate('/pendingDues')}> 
                   <img src= 
 "https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/6.png"
                       class="nav-img" 
-                      alt="institution" /> 
-                  <h3> Institution</h3> 
+                      alt="pendinng_dues" /> 
+                  <h3> Pending Dues</h3> 
               </div> 
 
               <div class="nav-option option5" onClick={() => navigate('/admin/books/add')}> 
