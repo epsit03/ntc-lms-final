@@ -15,9 +15,9 @@ router.get("/", async (req, res, next) => {
   }
 })
 
-router.get("/:bookIsbn", async (req, res, next) => {
+router.get("/:accNo", async (req, res, next) => {
   try {
-    const book = await BookModel.findOne({ isbn: req.params.bookIsbn })
+    const book = await BookModel.findOne({ accNo: req.params.accNo })
     if (book == null) {
       return res.status(404).json({ error: "Book not found" })
     }
@@ -34,7 +34,7 @@ router.get("/:bookIsbn", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const book = await BookModel.findOne({ isbn: req.body.isbn })
+    const book = await BookModel.findOne({ accNo: req.body.accNo })
     if (book != null) {
       return res.status(400).json({ error: "Book with same ISBN already found" })
     }
@@ -45,13 +45,13 @@ router.post("/", async (req, res, next) => {
   }
 })
 
-router.patch("/:bookIsbn", async (req, res, next) => {
+router.patch("/:accNo", async (req, res, next) => {
   try {
-    const book = await BookModel.findOne({ isbn: req.params.bookIsbn })
+    const book = await BookModel.findOne({ accNo: req.params.accNo })
     if (book == null) {
       return res.status(404).json({ error: "Book not found" })
     }
-    const { _id, isbn, ...rest } = req.body
+    const { _id, accNo, ...rest } = req.body
     const updatedBook = await book.update(rest)
     return res.status(200).json({ book: updatedBook })
   } catch (err) {
@@ -59,9 +59,9 @@ router.patch("/:bookIsbn", async (req, res, next) => {
   }
 })
 
-router.delete("/:bookIsbn", async (req, res, next) => {
+router.delete("/:accNo", async (req, res, next) => {
   try {
-    const book = await BookModel.findOne({ isbn: req.params.bookIsbn })
+    const book = await BookModel.findOne({ accNo: req.params.accNo })
     if (book == null) {
       return res.status(404).json({ error: "Book not found" })
     }

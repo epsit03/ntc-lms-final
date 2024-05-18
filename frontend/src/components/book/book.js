@@ -23,7 +23,7 @@ import { makeChartOptions } from "./chart-options"
 import classes from "./styles.module.css"
 
 export const Book = () => {
-    const { bookIsbn } = useParams()
+    const { accNo } = useParams()
     const { user, isAdmin } = useUser()
     const navigate = useNavigate()
     const [book, setBook] = useState(null)
@@ -33,7 +33,7 @@ export const Book = () => {
     const borrowBook = () => {
         if (book && user) {
             BackendApi.user
-                .borrowBook(book.isbn, user._id)
+                .borrowBook(book.accNo, user._id)
                 .then(({ book, error }) => {
                     if (error) {
                         NotificationManager.error(error)
@@ -49,7 +49,7 @@ export const Book = () => {
     const returnBook = () => {
         if (book && user) {
             BackendApi.user
-                .returnBook(book.isbn, user._id)
+                .returnBook(book.accNo, user._id)
                 .then(({ book, error }) => {
                     if (error) {
                         NotificationManager.error(error)
@@ -62,9 +62,9 @@ export const Book = () => {
     }
 
     useEffect(() => {
-        if (bookIsbn) {
+        if (accNo) {
             BackendApi.book
-                .getBookByIsbn(bookIsbn)
+                .getBookByAccNo(accNo)
                 .then(({ book, error }) => {
                     if (error) {
                         NotificationManager.error(error)
@@ -75,7 +75,7 @@ export const Book = () => {
                 .catch(console.error)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [bookIsbn])
+    }, [accNo])
 
     return (
         book && (
@@ -257,7 +257,7 @@ export const Book = () => {
                                     variant="contained"
                                     color="secondary"
                                     component={RouterLink}
-                                    to={`/admin/books/${bookIsbn}/edit`}
+                                    to={`/admin/books/${accNo}/edit`}
                                 >
                                     Edit Book
                                 </Button>
@@ -275,7 +275,7 @@ export const Book = () => {
                                     variant="contained"
                                     color="secondary"
                                     component={RouterLink}
-                                    to={`/admin/books/${bookIsbn}/edit`}
+                                    to={`/admin/books/${accNo}/edit`}
                                 >
                                     Pay Dues
                                 </Button>

@@ -1,16 +1,16 @@
 const UserApi = {
-  borrowBook: async (isbn, userId) => {
+  borrowBook: async (accNo, userId) => {
     const res = await fetch("/v1/user/borrow", {
       method: "POST",
-      body: JSON.stringify({ isbn, userId }),
+      body: JSON.stringify({ accNo, userId }),
       headers: { "Content-Type": "application/json" },
     })
     return res.json()
   },
-  returnBook: async (isbn, userId) => {
+  returnBook: async (accNo, userId) => {
     const res = await fetch("/v1/user/return", {
       method: "POST",
-      body: JSON.stringify({ isbn, userId }),
+      body: JSON.stringify({ accNo, userId }),
       headers: { "Content-Type": "application/json" },
     })
     return res.json()

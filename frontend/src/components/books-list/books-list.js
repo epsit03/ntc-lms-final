@@ -26,7 +26,7 @@ export const BooksList = () => {
     const [borrowedBook, setBorrowedBook] = useState([])
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(10)
-    const [activeBookIsbn, setActiveBookIsbn] = useState("")
+    const [activeBookAccNo, setActiveBookAccNo] = useState("")
     const [openModal, setOpenModal] = useState(false)
     const { isAdmin, user } = useUser()
 
@@ -42,11 +42,11 @@ export const BooksList = () => {
     }
 
     const deleteBook = () => {
-        if (activeBookIsbn && books.length) {
-            BackendApi.book.deleteBook(activeBookIsbn).then(({ success }) => {
+        if (activeBookAccNo && books.length) {
+            BackendApi.book.deleteBook(activeBookAccNo).then(({ success }) => {
                 fetchBooks().catch(console.error)
                 setOpenModal(false)
-                setActiveBookIsbn("")
+                setActiveBookAccNo("")
             })
         }
     }
@@ -98,7 +98,7 @@ export const BooksList = () => {
                                         ? books.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                         : books
                                     ).map((book) => (
-                                        <TableRow key={book.isbn}>
+                                        <TableRow key={book.accNo}>
                                         <TableCell component="th" scope="row">
                                                 {book.accNo}
                                             </TableCell>
@@ -126,7 +126,7 @@ export const BooksList = () => {
                                                         variant="contained"
                                                         component={RouterLink}
                                                         size="small"
-                                                        to={`/books/${book.isbn}`}
+                                                        to={`/books/${book.accNo}`}
                                                     >
                                                         View
                                                     </Button>
@@ -137,7 +137,7 @@ export const BooksList = () => {
                                                                 color="primary"
                                                                 component={RouterLink}
                                                                 size="small"
-                                                                to={`/admin/books/${book.isbn}/edit`}
+                                                                to={`/admin/books/${book.accNo}/edit`}
                                                             >
                                                                 Edit
                                                             </Button>
@@ -146,7 +146,7 @@ export const BooksList = () => {
                                                                 color="secondary"
                                                                 size="small"
                                                                 onClick={(e) => {
-                                                                    setActiveBookIsbn(book.isbn)
+                                                                    setActiveBookAccNo(book.accNo)
                                                                     setOpenModal(true)
                                                                 }}
                                                             >
@@ -215,7 +215,7 @@ export const BooksList = () => {
                                             </TableHead>
                                             <TableBody>
                                                 {borrowedBook.map((book) => (
-                                                    <TableRow key={book.isbn}>
+                                                    <TableRow key={book.accNo}>
                                                         <TableCell component="th" scope="row">
                                                             {book.title}
                                                         </TableCell>

@@ -3,8 +3,8 @@ const BookApi = {
     const res = await fetch("/v1/book", { method: "GET" })
     return res.json()
   },
-  getBookByIsbn: async (bookIsbn) => {
-    const res = await fetch(`/v1/book/${bookIsbn}`, { method: "GET" })
+  getBookByAccNo: async (accNo) => {
+    const res = await fetch(`/v1/book/${accNo}`, { method: "GET" })
     return res.json()
   },
   addBook: async (data) => {
@@ -16,16 +16,16 @@ const BookApi = {
     })
     return res.json()
   },
-  patchBookByIsbn: async (bookIsbn, data) => {
-    const res = await fetch(`/v1/book/${bookIsbn}`, {
+  patchBookByAccNo: async (accNo, data) => {
+    const res = await fetch(`/v1/book/${accNo}`, {
       method: "PATCH",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
     })
     return res.json()
   },
-  deleteBook: async (bookIsbn) => {
-    const res = await fetch(`/v1/book/${bookIsbn}`, { method: "DELETE" })
+  deleteBook: async (accNo) => {
+    const res = await fetch(`/v1/book/${accNo}`, { method: "DELETE" })
     return res.json()
   },
   addCategory: async (categories) => {

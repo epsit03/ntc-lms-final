@@ -185,12 +185,12 @@ const handleLogout = () => {
                   <h3> Add Student</h3> 
               </div> 
 
-              <div class="nav-option option7"> 
+              <div class="nav-option option7" onClick={() => navigate('/issueList')}> 
                   <img src= 
 "https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/4.png"
                       class="nav-img" 
                       alt="settings" /> 
-                  <h3> Settings</h3> 
+                  <h3> Issued Books List </h3> 
               </div> 
 
               <div class="nav-option logout" onClick={handleLogout}> 

@@ -140,7 +140,9 @@ export const StudentForm = () => {
                             <MenuItem value="CSE">C.S.E.</MenuItem>
                             <MenuItem value="CSE (AI & ML)">CSE (AI & ML )</MenuItem>
                             <MenuItem value="TT">TT</MenuItem>
+                            
                         </Select>
+                       {/* BTech (CSE, AI & ML, TT ) & Garment (Regular {1,2,3}  & DLP {1,2,3}) */}
                     </FormControl>
                     <FormControl className={classes.mb2}>
                         <InputLabel>Semester</InputLabel>

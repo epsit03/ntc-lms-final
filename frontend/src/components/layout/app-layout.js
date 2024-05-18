@@ -28,6 +28,7 @@ import { WithLoginProtector } from "../access-control/login-protector"
 import { WithAdminProtector } from "../access-control/admin-protector"
 import {StudentDues} from "../dues/dues"
 import { IssueBook } from "../issue-book/issue"
+import { IssueList } from "../issue-book/issueList"
 
 
 export const AppLayout = () => {
@@ -151,9 +152,10 @@ export const AppLayout = () => {
                 <Route path="/stForm" exact element={<StudentForm/>} />
                 <Route path="/stList" exact element={<StudentsList/>} />
                 <Route path="/pendingDues" exact element={<StudentDues/>} /> 
-                <Route path="/issueBook" exact element={<IssueBook />} />              
+                <Route path="/issueBook" exact element={<IssueBook />} />   
+                <Route path="/issueList" exact element={<IssueList />} />           
                 <Route
-                    path="/books/:bookIsbn"
+                    path="/books/:accNo"
                     element={
                         <WithLoginProtector>
                             <Book />
@@ -173,7 +175,7 @@ export const AppLayout = () => {
                 />
                 
                 <Route
-                    path="/admin/books/:bookIsbn/edit"
+                    path="/admin/books/:accNo/edit"
                     element={
                         <WithLoginProtector>
                             <WithAdminProtector>

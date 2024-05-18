@@ -31,14 +31,14 @@ dayjs.extend(utc)
 export const BookForm = () => {
     
     const [categories, setCategories] = useState([]);
-    const { bookIsbn } = useParams()
+    const { bookAccNo } = useParams()
     const navigate = useNavigate()
     const [book, setBook] = useState({
         // dte : Date().toLocaleString().split(',')[0],
-        accNo: "",
+        accNo: bookAccNo,
         title: "",
         keyw: "",
-        isbn: bookIsbn || "",
+        isbn: "",
         category: "",
         price: 0,
         quantity: 0,
@@ -89,7 +89,7 @@ export const BookForm = () => {
     const formSubmit = (event) => {
         event.preventDefault()
         if (!isInvalid) {
-            if (bookIsbn) {
+            if (bookAccNo) {
                 const newPrice = parseInt(book.price, 10)
                 const newQuantity = parseInt(book.quantity, 10)
                 let newPriceHistory = book.priceHistory.slice()
@@ -107,7 +107,7 @@ export const BookForm = () => {
                     newQuantityHistory.push({ quantity: newQuantity, modifiedAt: dayjs().utc().format() })
                 }
                 BookApi
-                    .patchBookByIsbn(bookIsbn, {
+                    .patchBookByAccNo(bookAccNo, {
                         ...book,
                         priceHistory: newPriceHistory,
                         quantityHistory: newQuantityHistory,
@@ -168,8 +168,8 @@ export const BookForm = () => {
       
 
     useEffect(() => {
-        if (bookIsbn) {
-            BookApi.book.getBookByIsbn(bookIsbn).then(({ book, error }) => {
+        if (bookAccNo) {
+            BookApi.getBookByAccNo(bookAccNo).then(({ book, error }) => {
                 if (error) {
                     navigate("/")
                 } else {
@@ -178,7 +178,7 @@ export const BookForm = () => {
             })
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [bookIsbn])
+    }, [bookAccNo])
 
     const [openAddCategoryDialog, setOpenAddCategoryDialog] = useState(false);
     
@@ -206,7 +206,7 @@ export const BookForm = () => {
         
             <Container component={Paper} className={classes.wrapper}>
                 <Typography className={classes.pageHeader} variant="h5">
-                    {bookIsbn ? "Update Book" : "Add Book"}
+                    {bookAccNo ? "Update Book" : " Add Book" }
                 </Typography>
                 <form noValidate autoComplete="off" onSubmit={formSubmit}>
                     <FormGroup>
@@ -260,6 +260,10 @@ export const BookForm = () => {
                                 <MenuItem value="Journals">Journals</MenuItem>
                                 <MenuItem value="Fiction">Fiction</MenuItem>
                                 <MenuItem value="Programming">Non-fiction</MenuItem>
+                                <MenuItem value="Book">Book</MenuItem>
+                                <MenuItem value="Thesis">Thesis</MenuItem>
+                                
+                                
                                 {/* <MenuItem value="Add Category">+ Add keyword</MenuItem> */}
                             </Select>
                         </FormControl>
@@ -317,6 +321,7 @@ export const BookForm = () => {
                                 helperText={errors.price}
                             />
                         </FormControl>
+                       {/* acc. no. to be generated in series as per the quantity */}
                         <FormControl className={classes.mb2}>
                             <TextField
                                 label="Quantity"
@@ -512,7 +517,7 @@ export const BookForm = () => {
                             Cancel
                         </Button>
                         <Button type="submit" variant="contained" color="primary" disabled={isInvalid}>
-                            {bookIsbn ? "Update Book" : "Add Book"}
+                            {bookAccNo ? "Update Book" : "Add Book"}
                         </Button>
                     </div>
                 </form>
